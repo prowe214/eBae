@@ -1,6 +1,5 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-
-<form class="login" action="/" method="post">
-
-</form>
+{{#if user}}
+  <h1>sup</h1>
+{{else}}
+  <a href="/login">Log In</a>
+{{/if}}
