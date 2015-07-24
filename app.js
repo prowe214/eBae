@@ -3,6 +3,8 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var db = require('monk')(process.env.MONGOLAB_URI);
+var users = db.get('users');
 var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session');
 require('dotenv').load();
@@ -40,11 +42,20 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: process.env.HOST + "/auth/facebook/callback",
+    profileFields: ['id', 'displayName', 'photos'],
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    users.findAndModify({
+      query: { facebookId: profile.id },
+      update: { $setOnInsert: {
+        name: profile.displayName,
+        photos: profile.photos
+      }},
+      new: true,
+      upsert: true
+    }, function (err, user) {
       return done(err, user);
     });
   }
