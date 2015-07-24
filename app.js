@@ -50,10 +50,17 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-app.get('/login', passport.authenticate('facebook', {
+app.get('/auth/facebook', passport.authenticate('facebook', {
   successRedirect: '/',
   failureRedirect: '/login'
 }));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/login'}),
+  function (req, res) {
+    res.redirect('/');
+  }
+);
 
 passport.serializeUser(function (user, done) {
   done(null, user);
