@@ -19,6 +19,11 @@
 - Bachelors and Bachelorettes can post their profile to the event, along with a bio and a decription of the activity that they will do with the auction winner (like dinner, adventures, sports, etc)
 - Users can click an event, and place bids on the Bachelor(ette)s 
 
+## Stretch Goals
+
+- User can see "Your Auctions" to keep track of the auctions they are participating in
+- User gets an email alert if they have been outbid
+
 ## Full Site Map
 
 ![image](http://i.imgur.com/PBJMHoN.png)
