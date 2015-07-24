@@ -63,7 +63,7 @@ passport.use(new FacebookStrategy({
 
 app.get('/auth/facebook', passport.authenticate('facebook', {
   successRedirect: '/',
-  failureRedirect: '/login'
+  failureRedirect: '/'
 }));
 
 app.get('/auth/facebook/callback',
