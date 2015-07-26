@@ -67,20 +67,13 @@ passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, done) {
     console.log('*********PROFILE DATABASE = ' + profiles);
     console.log('*********PROFILE INFO' + profile);
-    profiles.findOne({ facebookId: profile.id }, function (err, doc) {
+    profiles.findOne({ facebookId: profile.id }, function (err, doc, next) {
       if (doc) {
         console.log('*********DOC = ' + doc);
-        req.session.id = doc.id;
-        res.redirect('/');
+        return done(err, doc);
       } else {
-        profiles.insert(profile, function (err, doc) {
-          if (err) {
-            res.redirect('/error');
-          } else {
-            req.session.id = doc.id;
-            res.redirect('/');
-          }
-        });
+        profiles.insert(profile);
+        return done(err, profile);
       }
     },
     function (err, user) {
