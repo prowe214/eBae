@@ -47,26 +47,26 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
-    console.log('********USERS = ' + users);
-    users.findOne({ facebookId: profile.id }, function (err, doc) {
-      if (doc) {
-        console.log('*********DOC = ' + doc);
-        req.session.id = doc.id;
-        res.redirect('/');
-      } else {
-        users.insert(profile, function (err, doc) {
-          if (err) {
-            res.redirect('/error');
-          } else {
-            req.session.id = doc.id;
-            res.redirect('/');
-          }
-        });
-      }
-    },
-    function (err, user) {
-      return done(err, user);
-    });
+    res.redirect('/');
+    // users.findOne({ facebookId: profile.id }, function (err, doc) {
+    //   if (doc) {
+    //     console.log('*********DOC = ' + doc);
+    //     req.session.id = doc.id;
+    //     res.redirect('/');
+    //   } else {
+    //     users.insert(profile, function (err, doc) {
+    //       if (err) {
+    //         res.redirect('/error');
+    //       } else {
+    //         req.session.id = doc.id;
+    //         res.redirect('/');
+    //       }
+    //     });
+    //   }
+    // },
+    // function (err, user) {
+    //   return done(err, user);
+    // });
   }
 ));
 
