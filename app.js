@@ -5,12 +5,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var db = require('monk')(process.env.MONGOLAB_URI);
-var users = db.get('users');
+var profiles = db.get('users');
 var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session');
 var passport = require('passport');
 
 var FacebookStrategy = require('passport-facebook').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -38,6 +39,24 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.session());
 
+// passport.use(new TwitterStrategy({
+//     consumerKey: process.env.TWITTER_CONSUMER_KEY,
+//     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+//     callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
+//   },
+//   function(token, tokenSecret, profile, done) {
+//     console.log('**********PROFILE INFORMATION = ' + profile);
+//     console.log(profiles);
+//     users.findOne({ twitterId: profile.id }, function (err, user) {
+//       if (user) {
+//         return done(err, user);
+//       } else {
+//         users.insert({twitterId: profile.id})
+//       }
+//     });
+//   }
+// ));
+
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
@@ -46,27 +65,28 @@ passport.use(new FacebookStrategy({
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
+    console.log('*********PROFILE DATABASE = ' + profiles);
+    console.log('*********PROFILE INFO'+profile);
     res.redirect('/');
-    // users.findOne({ facebookId: profile.id }, function (err, doc) {
-    //   if (doc) {
-    //     console.log('*********DOC = ' + doc);
-    //     req.session.id = doc.id;
-    //     res.redirect('/');
-    //   } else {
-    //     users.insert(profile, function (err, doc) {
-    //       if (err) {
-    //         res.redirect('/error');
-    //       } else {
-    //         req.session.id = doc.id;
-    //         res.redirect('/');
-    //       }
-    //     });
-    //   }
-    // },
-    // function (err, user) {
-    //   return done(err, user);
-    // });
+    profiles.findOne({ facebookId: profile.id }, function (err, doc) {
+      if (doc) {
+        console.log('*********DOC = ' + doc);
+        req.session.id = doc.id;
+        res.redirect('/');
+      } else {
+        users.insert(profile, function (err, doc) {
+          if (err) {
+            res.redirect('/error');
+          } else {
+            req.session.id = doc.id;
+            res.redirect('/');
+          }
+        });
+      }
+    },
+    function (err, user) {
+      return done(err, user);
+    });
   }
 ));
 
