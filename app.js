@@ -47,14 +47,14 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
-    users.findAndModify({
-      query: { facebookId: profile.id },
-      update: { $setOnInsert: {
-        name: profile.displayName,
-      }},
-      new: true,
-      upsert: true
-    },
+    // users.findAndModify({
+    //   query: { facebookId: profile.id },
+    //   update: { $setOnInsert: {
+    //     name: profile.displayName,
+    //   }},
+    //   new: true,
+    //   upsert: true
+    // },
     function (err, user) {
       return done(err, user);
     });
