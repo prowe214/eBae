@@ -47,9 +47,10 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
-    users.update({
+    users.findOne({
       query: { facebookId: profile.id },
       update: { $setOnInsert: {
+        facebookId: profile.id,
         name: profile.displayName,
       }},
       new: true,
