@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+require('dotenv').load();
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -7,7 +8,6 @@ var db = require('monk')(process.env.MONGOLAB_URI);
 var users = db.get('users');
 var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session');
-require('dotenv').load();
 var passport = require('passport');
 
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -51,11 +51,11 @@ passport.use(new FacebookStrategy({
       query: { facebookId: profile.id },
       update: { $setOnInsert: {
         name: profile.displayName,
-        photos: profile.photos
       }},
       new: true,
       upsert: true
-    }, function (err, user) {
+    },
+    function (err, user) {
       return done(err, user);
     });
   }
