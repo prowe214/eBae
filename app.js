@@ -47,8 +47,10 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
+    console.log('********USERS = ' + users);
     users.findOne({ facebookId: profile.id }, function (err, doc) {
       if (doc) {
+        console.log('*********DOC = ' + doc);
         req.session.id = doc.id;
         res.redirect('/');
       } else {
