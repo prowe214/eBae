@@ -66,14 +66,14 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log('*********PROFILE DATABASE = ' + profiles);
-    console.log('*********PROFILE INFO'+profile);
+    console.log('*********PROFILE INFO' + profile);
     profiles.findOne({ facebookId: profile.id }, function (err, doc) {
       if (doc) {
         console.log('*********DOC = ' + doc);
         req.session.id = doc.id;
         res.redirect('/');
       } else {
-        users.insert(profile, function (err, doc) {
+        profiles.insert(profile, function (err, doc) {
           if (err) {
             res.redirect('/error');
           } else {
