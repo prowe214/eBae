@@ -47,14 +47,20 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
-    users.findOne({
-      query: { facebookId: profile.id },
-      update: { $setOnInsert: {
-        facebookId: profile.id,
-        name: profile.displayName,
-      }},
-      new: true,
-      upsert: true
+    users.findOne({ facebookId: profile.id }, function (err, doc) {
+      if (doc) {
+        req.session.id = doc.id;
+        res.redirect('/');
+      } else {
+        users.insert(profile, function (err, doc) {
+          if (err) {
+            res.redirect('/error');
+          } else {
+            req.session.id = doc.id;
+            res.redirect('/');
+          }
+        });
+      }
     },
     function (err, user) {
       return done(err, user);
