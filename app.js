@@ -66,7 +66,7 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log('*********PROFILE DATABASE = ' + profiles);
-    console.log('*********PROFILE INFO' + profile);
+    console.log(profile);
     profiles.findOne({ facebookId: profile.id }, function (err, doc, next) {
       if (doc) {
         console.log('*********DOC = ' + doc);

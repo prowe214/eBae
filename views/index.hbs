@@ -1,5 +1,7 @@
 {{#if user}}
-  <h1>sup, Username goes there >>: {{user.displayName}}</h1>
+  <h1>Hey look, its {{user.displayName}}!</h1>
+  photo?:<img src="{{user.photos}}" alt="photo" />
+  <a href="/auctions">Check out the current auction!</a>
 {{else}}
   <a href="/auth/facebook">Log In</a>
 {{/if}}

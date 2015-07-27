@@ -1,0 +1,11 @@
+<a href="/addauction">Add a Bachelor(ette) for Auction!</a>
+
+{{#each auctions}}
+  <a href="/{{this._id}}"><section class="auction">
+    <img src="{{this.photo}}" alt="profile image" />
+    <h2>{{this.firstname}}</h2>
+    <p class="tagline">
+      {{this.tagline}}
+    </p>
+  </section></a>
+{{/each}}
