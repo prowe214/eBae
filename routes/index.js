@@ -27,6 +27,11 @@ router.post('/addauction', function(req, res, next) {
   });
 });
 
+router.get('/logout', function(req, res, next) {
+  req.session = null;
+  res.redirect('/');
+});
+
 router.get('/:id', function (req, res, next) {
   auctions.findOne({_id: req.params.id}, function (err, doc) {
     if (err) res.render('error');
