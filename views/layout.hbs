@@ -10,7 +10,9 @@
       <h2>the Electronic Bachelor(ette) Auction Experience</h2>
       <nav>
         <a href="/auctions">All Auctions</a>
-        <a href="/logout">Log Out</a> <!-- NEED TO BUILD LOGOUT ROUTE -->
+        {{#if session}}
+          <a href="/logout">Log Out</a>
+        {{/if}}
       </nav>
     </header>
     <main>
