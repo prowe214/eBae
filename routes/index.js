@@ -36,19 +36,41 @@ router.get('/logout', function(req, res, next) {
 
 router.get('/:id/buy', function (req, res, next) {
   auctions.findOne({_id: req.params.id}, function (err, doc) {
-    stripe.charges.create({
-      amount: doc.currentbid,
-      currency: 'usd',
-      customer: req.session.id,
-      }, function (err, charge) {
-        if (err) {
-          res.render('error');
-        } else {
-          res.render('thankyou');
-        }
-      }
-    );
+    if (err) res.render('error');
+    res.render('stripe/buy', {auctions: doc});
+    // stripe.charges.create({
+    //   amount: doc.currentbid,
+    //   currency: 'usd',
+    //   customer: req.session.id,
+    //   }, function (err, charge) {
+    //     if (err) {
+    //       res.render('error');
+    //     } else {
+    //       res.render('thankyou');
+    //     }
+    //   }
+    // );
   });
+});
+
+function stripeResponseHandler(status, response) {
+  var form = req.body;
+
+  if (response.error) {
+    // Show the errors on the form
+    res.redirect('/:id/buy', {errors: response.error});
+  } else {
+    // response contains id and card, which contains additional card details
+    var token = response.id;
+    // Insert the token into the form so it gets submitted to the server
+    
+  }
+}
+
+router.post('/buy', function (req, res, next) {
+  var form = req.body;
+  Stripe.card.createToken(form, stripeResponseHandler);
+
 });
 
 router.get('/:id', function (req, res, next) {
