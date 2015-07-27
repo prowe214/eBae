@@ -42,4 +42,18 @@
   // This identifies your website in the createToken call below
   Stripe.setPublishableKey('pk_test_aWtdRLag3LdKmvllpRnyFMmN');
   // ...
+
+  function stripeResponseHandler(status, response) {
+    var form = req.body;
+    console.log(form);
+    if (response.error) {
+      // Show the errors on the form
+      res.redirect('/:id/buy', {errors: response.error});
+    } else {
+      // response contains id and card, which contains additional card details
+      var token = response.id;
+      // Insert the token into the form so it gets submitted to the server
+
+    }
+  }
 </script>

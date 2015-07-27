@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+require('dotenv').load();
 var db = require('monk')(process.env.MONGOLAB_URI);
 var auctions = db.get('auctions');
 var stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
@@ -53,23 +54,9 @@ router.get('/:id/buy', function (req, res, next) {
   });
 });
 
-function stripeResponseHandler(status, response) {
-  var form = req.body;
-
-  if (response.error) {
-    // Show the errors on the form
-    res.redirect('/:id/buy', {errors: response.error});
-  } else {
-    // response contains id and card, which contains additional card details
-    var token = response.id;
-    // Insert the token into the form so it gets submitted to the server
-    
-  }
-}
-
 router.post('/buy', function (req, res, next) {
   var form = req.body;
-  Stripe.card.createToken(form, stripeResponseHandler);
+  stripe.card.createToken(form, stripeResponseHandler);
 
 });
 
