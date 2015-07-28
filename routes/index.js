@@ -55,9 +55,7 @@ router.get('/:id/buy', function (req, res, next) {
 });
 
 router.post('/buy', function (req, res, next) {
-  var form = req.body;
-  stripe.card.createToken(form, stripeResponseHandler);
-
+  res.redirect('/auctions');
 });
 
 router.get('/:id', function (req, res, next) {
