@@ -1,13 +1,29 @@
 <form action="/addauction" method="post">
-  <label for="firstname">First Name</label>
+  <div class="form-row">
+    <label for="firstname">First Name</label>
     <input type="text" name="firstname" id="firstname">
-  <label for="tagline">Tagline</label>
+  </div>
+  <div class="form-row">
+    <label for="tagline">Tagline</label>
     <input type="text" name="tagline" id="tagline" placeholder="Say something fun about yourself!">
-  <label for="bio">Bio</label>
+  </div>
+  <div class="form-row">
+    <label for="bio">Bio</label>
     <textarea name="bio" rows="8" id="bio" cols="40"></textarea>
-  <label for="reward">Reward</label>
+  </div>
+  <div class="form-row">
+    <label for="reward">Reward</label>
     <textarea name="reward" rows="8" cols="40" id="reward" placeholder="What activities will you do with the winner to make their bid awesome?"></textarea>
-  <label for="photo">Photo URL</label>
+  </div>
+  <div class="form-row">
+    <label for="photo">Photo URL</label>
     <input type="text" name="photo" id="photo" >
-  <input type="submit" value="Post Auction!">
+  </div>
+  <div class="form-row">
+    <label for="currentbid">Starting Bid</label>
+    <input type="text" name="currentbid" id="currentbid" >
+  </div>
+  <div class="form-ro">
+    <input type="submit" value="Post Auction!">
+  </div>
 </form>

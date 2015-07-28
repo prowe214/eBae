@@ -1,19 +1,19 @@
 {{#auctions}}
-  <div class="">
+  <div class="show">
     <h2>Buying Auction for {{firstname}}</h2>
     <img src="{{photo}}" alt="" />
     <p>
       <em>By purchasing this auction for <strong>{{firstname}}</strong>, you are making a tax-deductible donation to the non-profit organization running the current auction.</em>
     </p>
   </div>
-  <form action="" method="post">
+  <form action="/buy" method="post">
     <script
       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
       data-key="pk_test_aWtdRLag3LdKmvllpRnyFMmN"
       data-amount="{{currentbid}}00"
       data-name="eBae"
       data-description="eBae Auction: {{firstname}}"
-      data-image="/128x128.png">
+      data-image="https://pbs.twimg.com/media/BtwsSYdIQAAXfBI.jpg">
     </script>
   </form>
 {{/auctions}}

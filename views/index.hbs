@@ -1,7 +1,11 @@
 {{#if user}}
   <h1>Hey look, its {{user.displayName}}!</h1>
   photo?:<img src="{{user.photos}}" alt="photo" />
-  <a href="/auctions">Check out the current auction!</a>
+  <form action="/auctions" method="get">
+    <input type="button" value="Check out the current auction!">
+  </form>
 {{else}}
-  <a href="/auth/facebook">Log In</a>
+  <form action="/auth/facebook" method="get">
+    <input type="submit" value="Log In">
+  </form>
 {{/if}}

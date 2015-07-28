@@ -1,19 +1,23 @@
 {{#if thankyou}}
   <div class="thankyou">
     <p>
-      
+      You're awesome, thank you for supporting!
     </p>
   </div>
 {{/if}}
 
-<a href="/addauction">Add a Bachelor(ette) for Auction!</a>
+<form action="/addauction" method="get">
+  <input type="submit" value="Add a Bachelor(ette) for Auction!">
+</form>
 
 {{#each auctions}}
   <a href="/{{this._id}}"><section class="auction">
     <img src="{{this.photo}}" alt="profile image" />
-    <h2>{{this.firstname}}</h2>
-    <p class="tagline">
-      {{this.tagline}}
-    </p>
+    <section class="content">
+      <h2>{{this.firstname}}</h2>
+      <p class="tagline">
+        {{this.tagline}}
+      </p>
+    </section>
   </section></a>
 {{/each}}

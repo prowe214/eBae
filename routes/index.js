@@ -10,6 +10,10 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/styleguide', function (req, res, next) {
+  res.render('static/styleguide');
+});
+
 router.get('/auctions', function(req, res, next) {
   auctions.find({}, function (err, docs) {
     if (err) res.render('error');
@@ -55,7 +59,7 @@ router.get('/:id/buy', function (req, res, next) {
 });
 
 router.post('/buy', function (req, res, next) {
-  res.redirect('/auctions');
+  res.redirect('auctions', {thankyou: true});
 });
 
 router.get('/:id', function (req, res, next) {

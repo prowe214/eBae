@@ -1,19 +1,23 @@
 {{#auctions}}
   <section class="show">
     <img src="{{this.photo}}" alt="profile image" />
-    <h2>{{firstname}}</h2>
-    <p class="tagline">
-      {{tagline}}
-    </p>
-    <h3>About Me</h3>
-    <p>
-      {{bio}}
-    </p>
-    <h3>Auction Reward</h3>
-    <p>
-      {{reward}}
-    </p>
-    <h3 class="currentbid">Current Bid: ${{currentbid}}</h3>
-    <a href="/{{_id}}/buy" class="buy">Buy this Auction!</a>
+    <section class="content">
+      <h2>{{firstname}}</h2>
+      <p class="tagline">
+        {{tagline}}
+      </p>
+      <h3>About Me</h3>
+      <p>
+        {{bio}}
+      </p>
+      <h3>Auction Reward</h3>
+      <p>
+        {{reward}}
+      </p>
+      <h3 class="currentbid">Current Bid: ${{currentbid}}</h3>
+      <form action="/{{_id}}/buy" class="buy" method="get">
+        <input type="submit" value="Buy this Auction!">
+      </form>
+    </section>
   </section>
 {{/auctions}}
