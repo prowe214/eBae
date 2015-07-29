@@ -21,27 +21,30 @@ router.get('/admin', function (req, res, next) {
 
 router.post('/admin', function (req, res, next) {
   var edits = req.body;
-  host.insert(edits, function (err, doc) {
-    if (err) {
-      res.render('error');
-    } else {
-    res.redirect('/auctions');
-    }
-  });
-  // host.update({current:'true'}, {
-  //   'name': edits.name,
-  //   'website': edits.website,
-  //   'description': edits.description,
-  //   'image': edits.image,
-  //   'current': 'true'
+  // host.insert(edits, function (err, doc) {
+  //   if (err) {
+  //     res.render('error');
+  //   } else {
+  //   res.redirect('/auctions');
+  //   }
   // });
-  // res.redirect('/auctions');
+  host.update({current:'true'}, {
+    'name': edits.name,
+    'website': edits.website,
+    'description': edits.description,
+    'image': edits.image,
+    'current': 'true'
+  });
+  res.redirect('/auctions');
 });
 
 router.get('/auctions', function(req, res, next) {
   auctions.find({}, function (err, docs) {
     if (err) res.render('error');
-    res.render('db/auctions', {auctions: docs, title: 'Current Auctions', id: req.session.id});
+    host.find({}, function (err, doc) {
+      if (err) res.render('error');
+      res.render('db/auctions', {auctions: docs, host: doc, title: 'Current Auctions', id: req.session.id});
+    })
   });
 });
 
@@ -67,23 +70,11 @@ router.get('/:id/buy', function (req, res, next) {
   auctions.findOne({_id: req.params.id}, function (err, doc) {
     if (err) res.render('error');
     res.render('stripe/buy', {auctions: doc});
-    // stripe.charges.create({
-    //   amount: doc.currentbid,
-    //   currency: 'usd',
-    //   customer: req.session.id,
-    //   }, function (err, charge) {
-    //     if (err) {
-    //       res.render('error');
-    //     } else {
-    //       res.render('thankyou');
-    //     }
-    //   }
-    // );
   });
 });
 
 router.post('/buy', function (req, res, next) {
-  res.redirect('auctions', {thankyou: true});
+  res.redirect('/auctions', {thankyou: true});
 });
 
 router.get('/:id', function (req, res, next) {

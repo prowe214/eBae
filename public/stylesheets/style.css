@@ -73,6 +73,21 @@ main {
     background-color: #5cc8ff; }
   main .all-auctions {
     margin-top: 40px; }
+  main .host-info {
+    color: white;
+    text-shadow: 2px 2px 2px #12150f;
+    background-position: center;
+    background-size: cover; }
+  main .overlay {
+    position: absolute;
+    width: inherit;
+    height: inherit; }
+  main .content {
+    padding: 10px;
+    color: white;
+    text-align: center; }
+    main .content .tagline {
+      font-style: italic; }
   main .auction, main .show {
     width: 250px;
     color: #e8e9eb;
@@ -89,17 +104,11 @@ main {
       background-size: cover;
       background-position: center;
       border-radius: inherit; }
-    main .auction .content, main .show .content {
-      padding: 10px;
-      color: white;
-      text-align: center; }
-      main .auction .content .tagline, main .show .content .tagline {
-        font-style: italic; }
   main .show {
     width: 40%;
     margin-left: 25%;
     margin-right: 25%; }
-  main .profile-image {
+  main .preview {
     min-height: 400px; }
   main h2 {
     font-size: 40px;

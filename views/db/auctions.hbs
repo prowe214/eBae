@@ -6,9 +6,20 @@
   </div>
 {{/if}}
 
-{{#each host}}
-  <h1>{{this.description}}</h1>
-{{/each}}
+{{#host}}
+  <section class="host-info" style='background: linear-gradient(rgba(75, 75, 75, 0.45), rgba(0, 0, 0, 0.45)),url({{image}});  background-color: black;'>
+      <section class="content">
+        <p>
+          Current Auction Host:
+        </p>
+        <h2>{{name}}</h2>
+        <a target='_blank' href={{website}}>{{website}}</a>
+        <p>
+          {{description}}
+        </p>
+      </section>
+  </section>
+{{/host}}
 
 <form action="/addauction" method="get">
   <input type="submit" value="Add a Bachelor(ette) for Auction!">

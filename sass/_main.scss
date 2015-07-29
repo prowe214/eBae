@@ -26,6 +26,24 @@ main {
     margin-top: 40px;
   }
 
+  .host-info {
+    color: white;
+    text-shadow: 2px 2px 2px $black;
+    background-position: center;
+    background-size: cover;
+  }
+
+
+  .content {
+    padding: 10px;
+    color: white;
+    text-align: center;
+
+    .tagline {
+      font-style: italic;
+    }
+  }
+
   .auction, .show {
     width: 250px;
     color: $white;
@@ -45,16 +63,16 @@ main {
       border-radius: inherit;
     }
 
-    .content {
-      padding: 10px;
-      color: white;
-      text-align: center;
-
-      .tagline {
-        font-style: italic;
-      }
-    }
   }
+
+    // .host-info: {
+    //   content: '';
+  	// 	position: absolute;
+  	// 	top: 0;
+  	// 	right: 0;
+  	// 	bottom: 0;
+  	// 	left: 0;
+    // }
 
   .show {
     width: 40%;
@@ -62,7 +80,7 @@ main {
     margin-right: 25%;
   }
 
-  .profile-image {min-height: 400px;}
+  .preview {min-height: 400px;}
 
   h2 {
     font-size: 40px;
