@@ -3,6 +3,7 @@ var router = express.Router();
 require('dotenv').load();
 var db = require('monk')(process.env.MONGOLAB_URI);
 var auctions = db.get('auctions');
+var host = db.get('host');
 var stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
 
 /* GET home page. */
@@ -12,6 +13,29 @@ router.get('/', function(req, res, next) {
 
 router.get('/styleguide', function (req, res, next) {
   res.render('static/styleguide');
+});
+
+router.get('/admin', function (req, res, next) {
+  res.render('db/admin');
+});
+
+router.post('/admin', function (req, res, next) {
+  var edits = req.body;
+  host.insert(edits, function (err, doc) {
+    if (err) {
+      res.render('error');
+    } else {
+    res.redirect('/auctions');
+    }
+  });
+  // host.update({current:'true'}, {
+  //   'name': edits.name,
+  //   'website': edits.website,
+  //   'description': edits.description,
+  //   'image': edits.image,
+  //   'current': 'true'
+  // });
+  // res.redirect('/auctions');
 });
 
 router.get('/auctions', function(req, res, next) {

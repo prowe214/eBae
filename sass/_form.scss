@@ -1,0 +1,52 @@
+form.form {
+  border-radius: 10px;
+  padding: 50px;
+  background-color: $white-bg;
+  width: 600px;
+  margin-left: 25%;
+  margin-right: 25%;
+
+  div.form-row {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  h2, h3 {
+    color: white;
+    text-align: center;
+  }
+
+  label {
+    color: $white;
+    display: inline-block;
+    text-align: right;
+    width: 100px;
+  }
+
+  input[type='text'], textarea {
+    width: 350px;
+    height: 40px;
+    margin-left: 10px;
+    border: none;
+    border-bottom: 1px solid $white;
+    background-color: rgba(0,0,0,0);
+    color: $white;
+    padding: 5px;
+    display: table-cell;
+    vertical-align: bottom;
+  }
+
+  textarea {
+    height: 80px;
+
+  }
+    #description {
+      height: 150px;
+      border: 1px solid $white;
+    }
+
+  .post {
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+}

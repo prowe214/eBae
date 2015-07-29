@@ -5,7 +5,7 @@ main {
   input[type='submit'] {
     display: inline-block;
     padding: 10px;
-    width: 200px;
+    min-width: 200px;
     margin: 10px 0px;
     font-size: large;
     background-color: $mute-color;
@@ -22,15 +22,26 @@ main {
     background-color: $accent-color;
   }
 
+  .all-auctions {
+    margin-top: 40px;
+  }
+
   .auction, .show {
     width: 250px;
+    color: $white;
+    text-align: center;
     float: left;
-    background: rgba(232,233,235, .3);
+    min-height: 350px;
+    background: $white-bg;
     text-shadow: 1px 1px 1px $black;
     border-radius: 10px;
+    margin-right: 15px;
 
-    img {
+    .profile-image {
       width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
       border-radius: inherit;
     }
 
@@ -50,6 +61,8 @@ main {
     margin-left: 25%;
     margin-right: 25%;
   }
+
+  .profile-image {min-height: 400px;}
 
   h2 {
     font-size: 40px;

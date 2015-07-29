@@ -1,11 +1,12 @@
 {{#auctions}}
-  <div class="show">
+  <section class="show">
     <h2>Buying Auction for {{firstname}}</h2>
-    <img src="{{photo}}" alt="" />
-    <p>
-      <em>By purchasing this auction for <strong>{{firstname}}</strong>, you are making a tax-deductible donation to the non-profit organization running the current auction.</em>
-    </p>
-  </div>
+    <section class="content">
+      <div class="profile-image" style="background-image: url({{photo}})"></div>
+      <p>
+        <em>By purchasing this auction for <strong>{{firstname}}</strong>, you are making a tax-deductible donation to the non-profit organization running the current auction.</em>
+      </p>
+    </section>
   <form action="/buy" method="post">
     <script
       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -16,44 +17,5 @@
       data-image="https://pbs.twimg.com/media/BtwsSYdIQAAXfBI.jpg">
     </script>
   </form>
+  </section>
 {{/auctions}}
-
-<!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-  // This identifies your website in the createToken call below
-  var form = document.getElementById('payment-form');
-  (function () {
-    Stripe.setPublishableKey('pk_test_aWtdRLag3LdKmvllpRnyFMmN');
-    console.log(Stripe);
-  })();
-  // ...
-  var button = document.getElementById('submit-payment');
-
-  var stripeResponseHandler = function (status, response) {
-    var form = document.getElementById('payment-form');
-    alert('IN THE FUNCTION!');
-    alert('STATUS = '+status);
-    alert('RESPONSE = '+response);
-    if (response.error) {
-      alert('ERROR!');
-      // Show the errors on the form
-      var errors = document.getElementsByClassName('payment-errors');
-      button.disabled = false;
-      errors[0].innerHTML = response.error.message;
-    } else {
-      alert('SUCCESS!');
-      // response contains id and card, which contains additional card details
-      var token = response.id;
-      // Insert the token into the form so it gets submitted to the server
-      form.appendChild(('<input type="hidden" name="stripeToken" />').value(token));
-    }
-  }
-
-  form.addEventListener('submit', function (e) {
-    console.log(e);
-    button.disabled = true;
-    Stripe.card.createToken(form, stripeResponseHandler());
-    return false;
-  })
-
-</script> -->

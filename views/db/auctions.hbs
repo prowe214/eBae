@@ -6,18 +6,24 @@
   </div>
 {{/if}}
 
+{{#each host}}
+  <h1>{{this.description}}</h1>
+{{/each}}
+
 <form action="/addauction" method="get">
   <input type="submit" value="Add a Bachelor(ette) for Auction!">
 </form>
 
-{{#each auctions}}
-  <a href="/{{this._id}}"><section class="auction">
-    <img src="{{this.photo}}" alt="profile image" />
-    <section class="content">
-      <h2>{{this.firstname}}</h2>
-      <p class="tagline">
-        {{this.tagline}}
-      </p>
-    </section>
-  </section></a>
-{{/each}}
+<section class="all-auctions">
+  {{#each auctions}}
+    <a href="/{{this._id}}"><section class="auction">
+      <div class="profile-image" style="background-image: url({{this.photo}});"></div>
+      <section class="content">
+        <h2>{{this.firstname}}</h2>
+        <p class="tagline">
+          {{this.tagline}}
+        </p>
+      </section>
+    </section></a>
+  {{/each}}
+</section>

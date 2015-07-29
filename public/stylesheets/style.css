@@ -1,9 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Cardo:400,400italic,700);
+*, *:before, *:after {
+  box-sizing: border-box; }
+
 body {
   font-family: 'Cardo', serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  margin-bottom: 150px;
   background-color: black; }
   body .bg-image {
     position: fixed;
@@ -55,7 +58,7 @@ main {
   main input[type='submit'] {
     display: inline-block;
     padding: 10px;
-    width: 200px;
+    min-width: 200px;
     margin: 10px 0px;
     font-size: large;
     background-color: #3e8989;
@@ -68,14 +71,23 @@ main {
     border: none; }
   main input[type='submit']:hover {
     background-color: #5cc8ff; }
+  main .all-auctions {
+    margin-top: 40px; }
   main .auction, main .show {
     width: 250px;
+    color: #e8e9eb;
+    text-align: center;
     float: left;
+    min-height: 350px;
     background: rgba(232, 233, 235, 0.3);
     text-shadow: 1px 1px 1px #12150f;
-    border-radius: 10px; }
-    main .auction img, main .show img {
+    border-radius: 10px;
+    margin-right: 15px; }
+    main .auction .profile-image, main .show .profile-image {
       width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
       border-radius: inherit; }
     main .auction .content, main .show .content {
       padding: 10px;
@@ -87,6 +99,8 @@ main {
     width: 40%;
     margin-left: 25%;
     margin-right: 25%; }
+  main .profile-image {
+    min-height: 400px; }
   main h2 {
     font-size: 40px;
     margin: 0; }
@@ -94,3 +108,41 @@ main {
     margin-bottom: 0; }
   main p {
     margin-top: 0; }
+
+form.form {
+  border-radius: 10px;
+  padding: 50px;
+  background-color: rgba(232, 233, 235, 0.3);
+  width: 600px;
+  margin-left: 25%;
+  margin-right: 25%; }
+  form.form div.form-row {
+    display: block;
+    margin-bottom: 10px; }
+  form.form h2, form.form h3 {
+    color: white;
+    text-align: center; }
+  form.form label {
+    color: #e8e9eb;
+    display: inline-block;
+    text-align: right;
+    width: 100px; }
+  form.form input[type='text'], form.form textarea {
+    width: 350px;
+    height: 40px;
+    margin-left: 10px;
+    border: none;
+    border-bottom: 1px solid #e8e9eb;
+    background-color: transparent;
+    color: #e8e9eb;
+    padding: 5px;
+    display: table-cell;
+    vertical-align: bottom; }
+  form.form textarea {
+    height: 80px; }
+  form.form #description {
+    height: 150px;
+    border: 1px solid #e8e9eb; }
+  form.form .post {
+    margin-left: 25%;
+    margin-right: 25%; }
