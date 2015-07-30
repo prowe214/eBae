@@ -25,10 +25,6 @@ router.get('/styleguide', function (req, res, next) {
   res.render('static/styleguide');
 });
 
-router.get('/admin', function (req, res, next) {
-  res.render('db/admin');
-});
-
 router.post('/admin', function (req, res, next) {
   var edits = req.body;
   host.update({current:'true'}, {

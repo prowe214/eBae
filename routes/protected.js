@@ -6,6 +6,10 @@ var auctions = db.get('auctions');
 var host = db.get('host');
 var stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
 
+router.get('/admin', function (req, res, next) {
+  res.render('db/admin');
+});
+
 router.post('/admin', function (req, res, next) {
   var edits = req.body;
   host.update({current:'true'}, {
