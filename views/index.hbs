@@ -1,8 +1,7 @@
 {{#if user}}
   <h1>Hey look, its {{user.displayName}}!</h1>
-  photo?:<img src="{{user.photos}}" alt="photo" />
   <form action="/auctions" method="get">
-    <input type="button" value="Check out the current auction!">
+    <input type="submit" value="Check out the current auction!">
   </form>
 {{else}}
   <form action="/auth/facebook" method="get">

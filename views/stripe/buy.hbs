@@ -1,21 +1,21 @@
 {{#auctions}}
-  <section class="show">
+  <section class="show confirm">
     <h2>Buying Auction for {{firstname}}</h2>
     <section class="content">
       <div class="profile-image preview" style="background-image: url({{photo}})"></div>
       <p>
-        <em>By purchasing this auction for <strong>{{firstname}}</strong>, you are making a tax-deductible donation to the non-profit organization running the current auction.</em>
+        <em>By purchasing this auction for <strong>{{firstname}}</strong>, you are making a tax-deductible donation to {{#host}}{{name}}{{/host}} the non-profit organization running the current auction.</em>
       </p>
     </section>
-  <form action="/buy" method="post">
-    <script
-      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-      data-key="pk_test_aWtdRLag3LdKmvllpRnyFMmN"
-      data-amount="{{currentbid}}00"
-      data-name="eBae"
-      data-description="eBae Auction: {{firstname}}"
-      data-image="https://pbs.twimg.com/media/BtwsSYdIQAAXfBI.jpg">
-    </script>
-  </form>
+    <form action="/buy" method="post">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_aWtdRLag3LdKmvllpRnyFMmN"
+        data-amount="{{currentbid}}00"
+        data-name="eBae"
+        data-description="eBae Auction: {{firstname}}"
+        data-image="https://pbs.twimg.com/media/BtwsSYdIQAAXfBI.jpg">
+      </script>
+    </form>
   </section>
 {{/auctions}}

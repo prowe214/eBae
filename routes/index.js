@@ -8,6 +8,16 @@ var stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  auctions.find({}, function (err, docs) {
+    if (err) res.render('error');
+    host.find({}, function (err, doc) {
+      if (err) res.render('error');
+      res.render('db/auctions', {auctions: docs, host: doc, title: 'Current Auctions', id: req.session.id});
+    });
+  });
+});
+
+router.get('/login', function (req, res, next) {
   res.render('index');
 });
 
@@ -21,13 +31,6 @@ router.get('/admin', function (req, res, next) {
 
 router.post('/admin', function (req, res, next) {
   var edits = req.body;
-  // host.insert(edits, function (err, doc) {
-  //   if (err) {
-  //     res.render('error');
-  //   } else {
-  //   res.redirect('/auctions');
-  //   }
-  // });
   host.update({current:'true'}, {
     'name': edits.name,
     'website': edits.website,
@@ -38,13 +41,18 @@ router.post('/admin', function (req, res, next) {
   res.redirect('/auctions');
 });
 
+router.get('/reset', function (req, res, next) {
+  auctions.remove({});
+  res.redirect('/auctions');
+});
+
 router.get('/auctions', function(req, res, next) {
   auctions.find({}, function (err, docs) {
     if (err) res.render('error');
     host.find({}, function (err, doc) {
       if (err) res.render('error');
       res.render('db/auctions', {auctions: docs, host: doc, title: 'Current Auctions', id: req.session.id});
-    })
+    });
   });
 });
 
@@ -63,19 +71,9 @@ router.post('/addauction', function(req, res, next) {
 
 router.get('/logout', function(req, res, next) {
   req.session = null;
-  res.redirect('/');
+  res.redirect('/auctions');
 });
 
-router.get('/:id/buy', function (req, res, next) {
-  auctions.findOne({_id: req.params.id}, function (err, doc) {
-    if (err) res.render('error');
-    res.render('stripe/buy', {auctions: doc});
-  });
-});
-
-router.post('/buy', function (req, res, next) {
-  res.redirect('/auctions', {thankyou: true});
-});
 
 router.get('/:id', function (req, res, next) {
   auctions.findOne({_id: req.params.id}, function (err, doc) {
@@ -83,5 +81,6 @@ router.get('/:id', function (req, res, next) {
     res.render('db/show', {auctions: doc});
   });
 });
+
 
 module.exports = router;

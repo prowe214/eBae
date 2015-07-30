@@ -15,6 +15,7 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var protect = require('./routes/protected');
 
 var app = express();
 
@@ -39,23 +40,13 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.session());
 
-// passport.use(new TwitterStrategy({
-//     consumerKey: process.env.TWITTER_CONSUMER_KEY,
-//     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-//     callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
-//   },
-//   function(token, tokenSecret, profile, done) {
-//     console.log('**********PROFILE INFORMATION = ' + profile);
-//     console.log(profiles);
-//     users.findOne({ twitterId: profile.id }, function (err, user) {
-//       if (user) {
-//         return done(err, user);
-//       } else {
-//         users.insert({twitterId: profile.id})
-//       }
-//     });
-//   }
-// ));
+var protectRoute = function (req, res, next) {
+  if (req.cookies.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+};
 
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
@@ -65,11 +56,8 @@ passport.use(new FacebookStrategy({
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log('*********PROFILE DATABASE = ' + profiles);
-    console.log(profile);
     profiles.findOne({ facebookId: profile.id }, function (err, doc, next) {
       if (doc) {
-        console.log('*********DOC = ' + doc);
         return done(err, doc);
       } else {
         profiles.insert(profile);
@@ -83,14 +71,14 @@ passport.use(new FacebookStrategy({
 ));
 
 app.get('/auth/facebook', passport.authenticate('facebook', {
-  successRedirect: '/',
-  failureRedirect: '/'
+  successRedirect: '/auctions',
+  failureRedirect: '/login'
 }));
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/login'}),
   function (req, res) {
-    res.redirect('/');
+    res.redirect('/auctions');
   }
 );
 
@@ -108,7 +96,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/', protectRoute, protect);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
