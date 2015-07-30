@@ -80,6 +80,7 @@ app.get('/auth/facebook/callback',
   function (req, res) {
     console.log('REQ = ', req.body);
     console.log('RES = ', res);
+    req.
     res.redirect('/auctions');
   }
 );
