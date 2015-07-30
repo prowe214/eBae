@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.session());
 
 var protectRoute = function (req, res, next) {
-  if (req.cookies.user) {
+  if (req.cookies.session) {
     next();
   } else {
     res.redirect('/login');
