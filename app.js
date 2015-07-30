@@ -14,7 +14,6 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var protect = require('./routes/protected');
 
 var app = express();
