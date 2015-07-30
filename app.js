@@ -56,7 +56,7 @@ passport.use(new FacebookStrategy({
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
-    profiles.findOne({ facebookId: profile.id }, function (err, doc, next) {
+    profiles.findOne({ id: profile.id }, function (err, doc, next) {
       if (doc) {
         return done(err, doc);
       } else {
@@ -70,17 +70,13 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-app.get('/auth/facebook', passport.authenticate('facebook', {
-  successRedirect: '/auctions',
-  failureRedirect: '/login'
-}));
+app.get('/auth/facebook', passport.authenticate('facebook', function (req, res) {}));
 
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/login'}),
+  passport.authenticate('facebook', {failureRedirect: '/auctions'}),
   function (req, res) {
     console.log('REQ = ', req.body);
     console.log('RES = ', res);
-    req.
     res.redirect('/auctions');
   }
 );
