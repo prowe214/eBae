@@ -58,13 +58,4 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/auctions');
 });
 
-
-router.get('/:id', function (req, res, next) {
-  auctions.findOne({_id: req.params.id}, function (err, doc) {
-    if (err) res.render('error');
-    res.render('db/show', {auctions: doc});
-  });
-});
-
-
 module.exports = router;

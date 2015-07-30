@@ -15,6 +15,7 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 
 var routes = require('./routes/index');
 var protect = require('./routes/protected');
+var users = require('./routes/users');
 
 var app = express();
 
@@ -95,6 +96,7 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/', protectRoute, protect);
+app.use('/', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
