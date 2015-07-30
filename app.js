@@ -78,8 +78,8 @@ app.get('/auth/facebook', passport.authenticate('facebook', {
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {failureRedirect: '/login'}),
   function (req, res) {
-    console.log('REQ = '+ req.body);
-    console.log('RES = '+res.body);
+    console.log('REQ = ', req.body);
+    console.log('RES = ', res);
     res.redirect('/auctions');
   }
 );
