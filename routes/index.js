@@ -25,18 +25,6 @@ router.get('/styleguide', function (req, res, next) {
   res.render('static/styleguide');
 });
 
-router.post('/admin', function (req, res, next) {
-  var edits = req.body;
-  host.update({current:'true'}, {
-    'name': edits.name,
-    'website': edits.website,
-    'description': edits.description,
-    'image': edits.image,
-    'current': 'true'
-  });
-  res.redirect('/auctions');
-});
-
 router.get('/reset', function (req, res, next) {
   auctions.remove({});
   res.redirect('/auctions');
