@@ -11,7 +11,6 @@ var cookieSession = require('cookie-session');
 var passport = require('passport');
 
 var FacebookStrategy = require('passport-facebook').Strategy;
-var TwitterStrategy = require('passport-twitter').Strategy;
 
 var routes = require('./routes/index');
 var protect = require('./routes/protected');
@@ -94,7 +93,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
-app.use('/', protect); //ADD BACK protectRoute MIDDLEWARE BEFORE DEPLOY
+app.use('/', protectRoute, protect); //ADD BACK protectRoute MIDDLEWARE BEFORE DEPLOY
 app.use('/', users);
 
 // catch 404 and forward to error handler

@@ -54,7 +54,7 @@ router.post('/addauction', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
-  req.session.destroy();
+  req.session = null;
   res.redirect('/auctions');
 });
 
