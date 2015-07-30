@@ -29,7 +29,6 @@ app.use(cookieSession({
   secret: process.env.FACEBOOK_APP_SECRET
 }));
 
-
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -95,7 +94,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
-app.use('/', protectRoute, protect);
+app.use('/', protect); //ADD BACK protectRoute MIDDLEWARE BEFORE DEPLOY
 app.use('/', users);
 
 // catch 404 and forward to error handler
